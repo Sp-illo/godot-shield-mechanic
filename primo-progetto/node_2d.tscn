@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dqqpbadsgqeg8"]
+
+[ext_resource type="Script" uid="uid://c7c6vx2t7hb21" path="res://shield_bar.gd" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://bl18r822swo40" path="res://player.gd" id="2_0e48y"]
+[ext_resource type="Script" uid="uid://ctf6i76ty3g1i" path="res://bullet.gd" id="3_0hol4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cqjn"]
+size = Vector2(198, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5u8mh"]
+size = Vector2(25, 53)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0shom"]
+size = Vector2(11, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pa5rn"]
+size = Vector2(1211, 216)
+
+[node name="Node2D" type="Node2D" unique_id=1009367942]
+metadata/_edit_horizontal_guides_ = [287.0]
+
+[node name="shieldBar" type="AnimatableBody2D" parent="." unique_id=1031223109]
+input_pickable = true
+script = ExtResource("1_wtcfe")
+
+[node name="barraVita" type="ColorRect" parent="shieldBar" unique_id=52470444]
+offset_left = 68.0
+offset_top = 81.0
+offset_right = 265.0
+offset_bottom = 99.0
+mouse_filter = 2
+color = Color(1, 0.101960786, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shieldBar" unique_id=541607115]
+position = Vector2(166, 90.5)
+shape = SubResource("RectangleShape2D_2cqjn")
+
+[node name="player" type="CharacterBody2D" parent="." unique_id=2082633931]
+script = ExtResource("2_0e48y")
+
+[node name="playerSkin" type="ColorRect" parent="player" unique_id=178132622]
+offset_left = 551.0
+offset_top = 342.0
+offset_right = 576.0
+offset_bottom = 395.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player" unique_id=15935588]
+position = Vector2(564, 368.5)
+shape = SubResource("RectangleShape2D_5u8mh")
+
+[node name="bullet" type="Area2D" parent="." unique_id=953887284]
+position = Vector2(302, 82)
+script = ExtResource("3_0hol4")
+
+[node name="ColorRect" type="ColorRect" parent="bullet" unique_id=834679401]
+offset_left = 259.0
+offset_top = -15.0
+offset_right = 270.0
+offset_bottom = -5.0
+color = Color(0.85907805, 0.85907793, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bullet" unique_id=555500623]
+position = Vector2(264.5, -10)
+shape = SubResource("RectangleShape2D_0shom")
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=526939029]
+
+[node name="ColorRect" type="ColorRect" parent="Floor" unique_id=425331003]
+offset_left = -30.0
+offset_top = 485.0
+offset_right = 1159.0
+offset_bottom = 671.0
+color = Color(0.033023953, 0.28497747, 0.39593112, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=842986273]
+position = Vector2(558.5, 592)
+shape = SubResource("RectangleShape2D_pa5rn")
+
+[connection signal="body_entered" from="bullet" to="bullet" method="_on_body_entered"]
